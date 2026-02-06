@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1273,3 +1274,1280 @@ You just want the right answer—quickly, calmly, and with confidence.
     </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUMAA - Your Caring AI Companion</title>
+    <link rel="icon" type="image/jpeg" href="photo_6064604666927975870_y.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* MUMAA Premium Dark Theme */
+            --background: hsl(240, 15%, 5%);
+            --foreground: hsl(0, 0%, 98%);
+            --card: hsl(240, 12%, 8%);
+            --card-foreground: hsl(0, 0%, 98%);
+            
+            /* Soft Mint Green - Primary */
+            --primary: hsl(150, 45%, 65%);
+            --primary-foreground: hsl(240, 15%, 5%);
+            
+            /* Soft Coral/Peach */
+            --secondary: hsl(15, 75%, 75%);
+            --secondary-foreground: hsl(240, 15%, 5%);
+            
+            /* Soft Sky Blue */
+            --accent: hsl(195, 80%, 70%);
+            --accent-foreground: hsl(240, 15%, 5%);
+            
+            /* Soft Lavender */
+            --lavender: hsl(260, 50%, 75%);
+            --lavender-foreground: hsl(240, 15%, 5%);
+            
+            --muted: hsl(240, 10%, 15%);
+            --muted-foreground: hsl(240, 5%, 65%);
+            --border: hsl(240, 10%, 18%);
+            
+            /* Custom gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(150, 45%, 65%), hsl(195, 80%, 70%));
+            --gradient-secondary: linear-gradient(135deg, hsl(15, 75%, 75%), hsl(260, 50%, 75%));
+            --gradient-team-1: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%);
+            --gradient-team-2: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+            --gradient-team-3: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+            
+            --gradient-mesh: radial-gradient(at 40% 20%, hsl(150, 45%, 65%, 0.08) 0px, transparent 50%), 
+                             radial-gradient(at 80% 0%, hsl(195, 80%, 70%, 0.08) 0px, transparent 50%),
+                             radial-gradient(at 0% 50%, hsl(260, 50%, 75%, 0.08) 0px, transparent 50%),
+                             radial-gradient(at 80% 50%, hsl(15, 75%, 75%, 0.06) 0px, transparent 50%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--foreground);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .text-gradient-primary {
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-secondary {
+            background: var(--gradient-secondary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-mesh {
+            background-image: var(--gradient-mesh);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--primary-foreground);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--foreground);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 1rem 0;
+            background: rgba(12, 12, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img-custom {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--foreground);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            z-index: 1001;
+        }
+
+        .mobile-menu span {
+            width: 24px;
+            height: 2px;
+            background: var(--foreground);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-menu.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .mobile-menu.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.2;
+            animation: pulse-glow 6s ease-in-out infinite;
+        }
+
+        .hero-glow:nth-child(1) {
+            top: -10%;
+            left: 20%;
+            background: var(--primary);
+        }
+
+        .hero-glow:nth-child(2) {
+            bottom: -10%;
+            right: 20%;
+            background: var(--accent);
+            animation-delay: 2s;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-logo-wrapper {
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-logo-custom {
+            width: 140px;
+            height: 140px;
+            border-radius: 28px;
+            object-fit: contain;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            margin-bottom: 2.5rem;
+            font-size: 14px;
+            color: var(--foreground);
+            font-weight: 500;
+        }
+
+        .audio-wave {
+            display: flex;
+            gap: 3px;
+            height: 16px;
+            align-items: center;
+        }
+
+        .audio-wave span {
+            width: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+            animation: wave 1.2s ease-in-out infinite;
+        }
+
+        .audio-wave span:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .audio-wave span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+        .audio-wave span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+        .audio-wave span:nth-child(4) { height: 16px; animation-delay: 0.45s; }
+        .audio-wave span:nth-child(5) { height: 8px; animation-delay: 0.6s; }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--muted-foreground);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .trust-badge svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.05);
+            color: var(--primary);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section p {
+            font-size: 1.125rem;
+            color: var(--muted-foreground);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Problem Section */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .problem-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .problem-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+        }
+
+        .problem-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card p {
+            color: var(--muted-foreground);
+            line-height: 1.7;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card:nth-child(1):hover { border-color: var(--primary); }
+        .feature-card:nth-child(2):hover { border-color: var(--accent); }
+        .feature-card:nth-child(3):hover { border-color: var(--secondary); }
+        .feature-card:nth-child(4):hover { border-color: var(--lavender); }
+        .feature-card:nth-child(5):hover { border-color: var(--primary); }
+        .feature-card:nth-child(6):hover { border-color: var(--accent); }
+        .feature-card:nth-child(7):hover { border-color: var(--secondary); }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-card:nth-child(1) .feature-icon { background: rgba(150, 200, 180, 0.1); color: var(--primary); }
+        .feature-card:nth-child(2) .feature-icon { background: rgba(135, 206, 235, 0.1); color: var(--accent); }
+        .feature-card:nth-child(3) .feature-icon { background: rgba(255, 182, 193, 0.1); color: var(--secondary); }
+        .feature-card:nth-child(4) .feature-icon { background: rgba(221, 160, 221, 0.1); color: var(--lavender); }
+        .feature-card:nth-child(5) .feature-icon { background: rgba(150, 200, 180, 0.1); color: var(--primary); }
+        .feature-card:nth-child(6) .feature-icon { background: rgba(135, 206, 235, 0.1); color: var(--accent); }
+        .feature-card:nth-child(7) .feature-icon { background: rgba(255, 182, 193, 0.1); color: var(--secondary); }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .team-image-wrapper {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+            background-size: 200% 200%;
+            animation: gradient-shift 4s ease infinite;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .team-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--background);
+        }
+
+        .team-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .team-avatar.sanjana { background: var(--gradient-secondary); }
+        .team-avatar.ayush { background: var(--gradient-primary); }
+        .team-avatar.divyansh { background: var(--gradient-secondary); filter: hue-rotate(45deg); }
+
+        .team-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .team-role {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .team-bio {
+             font-size: 0.9rem;
+             color: var(--muted-foreground);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            padding: 6rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted-foreground);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--foreground);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.4); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 15, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border);
+                transform: translateY(-20px);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+        /* Special Try AI Button */
+        .ai-btn {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+            color: white !important;
+            padding: 12px 24px !important;
+            border-radius: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
+            color: white !important;
+        }
+
+        .ai-btn::before {
+            content: '🤖 ';
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0 2rem;
+            }
+
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <img src="photo_6064604666927975870_y.jpg" alt="MUMAA Logo" class="logo-img-custom">
+                <span class="logo-text">MUMAA</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="ai.html" 
+     target="_blank" 
+     class="ai-btn">Try AI</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#waitlist" class="btn btn-primary" style="padding: 8px 20px; color: var(--primary-foreground);">Join Waitlist</a></li>
+            </ul>
+            
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero bg-mesh">
+        <div class="hero-glow"></div>
+        <div class="hero-glow"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-logo-wrapper">
+                    <img src="photo_6064604666927975870_y.jpg" alt="MUMAA Logo" class="hero-logo-custom">
+                </div>
+                
+                <div class="hero-badge">
+                    <div class="audio-wave">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    AI-Powered Voice Understanding
+                </div>
+                
+                <h1>
+                    Understand Your Child's<br>
+                    <span class="text-gradient-primary">Every Emotion</span>
+                </h1>
+                
+                <p>
+                    MUMAA guides parents with AI-powered voice understanding—
+so you can react with patience, care, and confidence,
+without cameras or screen dependency.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
+                    <a href="#features" class="btn btn-outline">Learn How It Works</a>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        </svg>
+                        Privacy First
+                    </div>
+                    <div class="trust-badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        Pediatrician Backed
+                    </div>
+                    <div class="trust-badge">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9.5 16.5c0 2 2.5 3.5 2.5 3.5s2.5-1.5 2.5-3.5-1 3.5-2.5 3.5-2.5-1.5-2.5-3.5zM8.5 12c0 2 2.5 3.5 2.5 3.5s2.5-1.5 2.5-3.5S11 15.5 11 15.5 8.5 14 8.5 12z"/>
+                        </svg>
+                        AI-Powered Insights
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">The Challenge</span>
+                <h2>
+                    Parenting Shouldn't Feel Like<br>
+                    <span class="text-gradient-secondary">Solving a Mystery</span>
+                </h2>
+                <p>
+                   When your baby cries, questions pile up.
+Hunger? Discomfort? Sleep?
+You just want the right answer—quickly, calmly, and with confidence.
+                </p>
+            </div>
+            
+            <div class="problems-grid">
+                <div class="problem-card glass-card">
+                    <div class="problem-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3>Sleepless Nights</h3>
+                    <p>Endless nights wondering if your baby's cry means hunger, discomfort, or something more serious.</p>
+                </div>
+                
+                <div class="problem-card glass-card">
+                    <div class="problem-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-6h2v6zm0-8h-2V7h2v4z"/>
+                        </svg>
+                    </div>
+                    <h3>Guessing Games</h3>
+                    <p>Traditional monitors tell you your baby is crying, but not why—leaving you anxious and uncertain.</p>
+                </div>
+                
+                <div class="problem-card glass-card">
+                    <div class="problem-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                    <h3>Information Overload</h3>
+                    <p>Conflicting parenting advice online makes it harder to trust your instincts when it matters most.</p>
+                </div>
+                
+                <div class="problem-card glass-card">
+                    <div class="problem-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3>Constant Screen Time</h3>
+                    <p>Camera-based monitors tether you to a screen, increasing anxiety instead of reducing it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Meet MUMAA</span>
+                <h2>
+                    Your Intelligent<br>
+                    <span class="text-gradient-primary">Parenting Companion</span>
+                </h2>
+                <p>
+                    MUMAA is an AI-driven, voice-based platform designed to support parents from infancy 
+                    through middle childhood. We use intelligent audio analysis—not cameras—to help you 
+                    understand and respond to your child's needs with calm confidence.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Features</span>
+                <h2>Everything You Need<br><span class="text-gradient-secondary">For Peace of Mind</span></h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3>Cry Pattern Analysis</h3>
+                    <p>Advanced AI that understands the nuances in your baby's cries—distinguishing hunger from discomfort, tiredness from distress.</p>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Emotional Intelligence</h3>
+                    <p>Detects emotional tones as your child grows, helping you understand their feelings even before they can express them clearly.</p>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    <h3>Developmental Insights</h3>
+                    <p>Age-appropriate guidance based on behavioral patterns, supporting healthy development from infancy through childhood.</p>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                        </svg>
+                    </div>
+                    <h3>Conversational AI</h3>
+                    <p>Get personalized parenting advice through natural conversation—like having an expert available 24/7.</p>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                        </svg>
+                    </div>
+                    <h3>Sleep Pattern Tracking</h3>
+                    <p>Monitor and analyze sleep patterns to help establish healthy routines and identify potential sleep issues early.</p>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                        </svg>
+                    </div>
+                    <h3>Privacy-First Design</h3>
+                    <p>No cameras, no video recording. All data is encrypted and processed securely, keeping your family's privacy intact.</p>
+                </div>
+                
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3>Real-Time Alerts</h3>
+                    <p>Instant notifications when your child needs attention, with context about what might be causing distress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Our Team</span>
+                <h2>Driven by Passion,<br><span class="text-gradient-primary">Guided by Care</span></h2>
+                <p>Meet the visionaries building the future of parenting support.</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Sanjana -->
+                <div class="team-card glass-card">
+                    <div class="team-image-wrapper">
+                         <img src="Gemini_Generated_Image_7en2cs7en2cs7en2.png" alt="Sanjana" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <h3>Sanjana</h3>
+                    <p class="team-role">Founder & CEO</p>
+                    <p class="team-bio">Visionary leader passionate about empowering parents with technology.</p>
+                    <a href="https://www.linkedin.com/in/sanjanamishra1208/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.3s;">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+                
+                <!-- Ayush -->
+                <div class="team-card glass-card">
+                    <div class="team-image-wrapper">
+                         <img src="photo_6064266399598710436_y.jpg" alt="Ayush" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <h3>Ayush</h3>
+                    <p class="team-role">Co-Founder & CTO</p>
+                    <p class="team-bio">Driving strategy and innovation to bring MUMAA to families worldwide.</p>
+                    <a href="https://www.linkedin.com/in/ayushr20/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.3s;">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+                
+                <!-- Divyansh -->
+                <div class="team-card glass-card">
+                    <div class="team-image-wrapper">
+                         <img src="WhatsApp Image 2026-02-05 at 23.48.11.jpeg" alt="Divyansh" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    </div>
+                    <h3>Divyansh</h3>
+                    <p class="team-role">Director of Operations</p>
+                    <p class="team-bio">Ensuring operational excellence and smooth delivery of our services.</p>
+                    <a href="https://www.linkedin.com/in/divyansh-kumar-a4529922a/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.3s;">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="section" id="privacy">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Privacy First</span>
+                <h2>Your Family's Privacy is Sacred</h2>
+                <p>
+                    Unlike traditional baby monitors, MUMAA doesn't just alert you—it helps you understand. 
+                    No cameras. No constant screen exposure. Just intelligent, privacy-first insights.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" id="waitlist">
+        <div class="container">
+            <div class="glass-card" style="padding: 4rem 2rem; text-align: center; border-color: var(--primary);">
+                <h2 style="margin-bottom: 1rem;">Ready to Transform Your Parenting Journey?</h2>
+                <p style="margin-bottom: 2rem;">Join thousands of parents who are already on the waitlist for MUMAA.</p>
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <form style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <input type="email" placeholder="Enter your email" required style="flex: 1; min-width: 250px; padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--foreground); font-size: 1rem;">
+                        <button type="submit" class="btn btn-primary" style="font-size: 1rem; padding: 16px 32px;">Join Waitlist</button>
+                    </form>
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7;">Early access coming soon.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="photo_6064604666927975870_y.jpg" alt="MUMAA Logo" class="logo-img-custom">
+                        <span class="logo-text">MUMAA</span>
+                    </a>
+                    <p>AI-powered voice understanding for parents. Helping you respond calmly and confidently to your child's needs.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                                <path d="m16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#features">How It Works</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#waitlist">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 MUMAA. All rights reserved.</p>
+                <div style="display: flex; gap: 1.5rem;">
+                     <a href="#" style="color: var(--muted-foreground); text-decoration: none; font-size: 0.9rem;">Terms</a>
+                     <a href="#" style="color: var(--muted-foreground); text-decoration: none; font-size: 0.9rem;">Privacy</a>
+                </div>
+                <p>Made with ❤️ for parents everywhere</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const target = document.querySelector(targetId);
+                if (target) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section h2, .problem-card, .feature-card, .team-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+>>>>>>> 569effb5974e6d305a9d483504b767e8967687a5
