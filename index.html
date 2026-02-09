@@ -4,1294 +4,604 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUMAA - Your Caring AI Companion</title>
+    <title>Mumaa - Parenting Guide</title>
     <link rel="icon" type="image/jpeg" href="photo_6064604666927975870_y.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            /* MUMAA Premium Dark Theme */
-            --background: hsl(240, 15%, 5%);
-            --foreground: hsl(0, 0%, 98%);
-            --card: hsl(240, 12%, 8%);
-            --card-foreground: hsl(0, 0%, 98%);
-            
-            /* Soft Mint Green - Primary */
-            --primary: hsl(150, 45%, 65%);
-            --primary-foreground: hsl(240, 15%, 5%);
-            
-            /* Soft Coral/Peach */
-            --secondary: hsl(15, 75%, 75%);
-            --secondary-foreground: hsl(240, 15%, 5%);
-            
-            /* Soft Sky Blue */
-            --accent: hsl(195, 80%, 70%);
-            --accent-foreground: hsl(240, 15%, 5%);
-            
-            /* Soft Lavender */
-            --lavender: hsl(260, 50%, 75%);
-            --lavender-foreground: hsl(240, 15%, 5%);
-            
-            --muted: hsl(240, 10%, 15%);
-            --muted-foreground: hsl(240, 5%, 65%);
-            --border: hsl(240, 10%, 18%);
-            
-            /* Custom gradients */
-            --gradient-primary: linear-gradient(135deg, hsl(150, 45%, 65%), hsl(195, 80%, 70%));
-            --gradient-secondary: linear-gradient(135deg, hsl(15, 75%, 75%), hsl(260, 50%, 75%));
-            --gradient-team-1: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%);
-            --gradient-team-2: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-            --gradient-team-3: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-            
-            --gradient-mesh: radial-gradient(at 40% 20%, hsl(150, 45%, 65%, 0.08) 0px, transparent 50%), 
-                             radial-gradient(at 80% 0%, hsl(195, 80%, 70%, 0.08) 0px, transparent 50%),
-                             radial-gradient(at 0% 50%, hsl(260, 50%, 75%, 0.08) 0px, transparent 50%),
-                             radial-gradient(at 80% 50%, hsl(15, 75%, 75%, 0.06) 0px, transparent 50%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background: var(--background);
-            color: var(--foreground);
-            font-family: 'DM Sans', sans-serif;
-            line-height: 1.6;
+            font-family: 'Nunito', sans-serif;
+            background-color: #0B101B;
+            background-image: radial-gradient(circle at 50% 0%, #1a253a 0%, #0B101B 60%);
+            color: white;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Outfit', sans-serif;
+        /* Custom glow effects for images */
+        .glow-orb-container {
+            position: relative;
+        }
+        
+        .glow-orb-bg {
+            background: radial-gradient(circle, rgba(167, 215, 197, 0.15) 0%, rgba(11, 16, 27, 0) 70%);
+            filter: blur(40px);
         }
 
-        .text-gradient-primary {
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .text-gradient-secondary {
-            background: var(--gradient-secondary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bg-mesh {
-            background-image: var(--gradient-mesh);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 500;
-            text-decoration: none;
+        /* Refined Card Gradient to match the dark glass look */
+        .card-gradient {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
         }
 
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: var(--primary-foreground);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        .card-gradient:hover {
+            transform: translateY(-5px);
+            border-color: rgba(167, 215, 197, 0.2);
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            filter: brightness(1.1);
+        .text-sage {
+            color: #A7D7C5;
         }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--foreground);
-            border: 2px solid var(--primary);
+        .bg-sage {
+            background-color: #A7D7C5;
+        }
+        
+        .bg-sage-hover:hover {
+            background-color: #8FbFbD;
         }
 
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--primary-foreground);
-        }
-
-        /* Header */
-        .header {
+        /* Starry background animation */
+        .stars {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 20px 30px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 100px 70px, rgba(255,255,255,0.6), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 150px 220px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 200px 50px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 350px 120px, rgba(255,255,255,0.5), rgba(0,0,0,0));
+            background-size: 550px 550px;
+            opacity: 0.4;
         }
 
-        .header.scrolled {
-            padding: 1rem 0;
-            background: rgba(12, 12, 20, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        /* More circular, organic mask for the hero image */
+        .mask-image-womb {
+            mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 95%);
+            border-radius: 50%;
+        }
+        
+        /* Soft fade at the bottom of the page */
+        .bottom-fade {
+            background: linear-gradient(to top, #0B101B 10%, transparent);
         }
 
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        /* Slideshow animation */
+        @keyframes slideshow {
+            0%, 33% { opacity: 1; }
+            34%, 100% { opacity: 0; }
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-img-custom {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            font-family: 'Outfit', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: var(--gradient-primary);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--muted-foreground);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--foreground);
-        }
-
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 6px;
-            z-index: 1001;
-        }
-
-        .mobile-menu span {
-            width: 24px;
-            height: 2px;
-            background: var(--foreground);
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        .mobile-menu.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-        .mobile-menu.active span:nth-child(2) { opacity: 0; }
-        .mobile-menu.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-
-        .hero-glow {
+        .slideshow-img {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.2;
-            animation: pulse-glow 6s ease-in-out infinite;
-        }
-
-        .hero-glow:nth-child(1) {
-            top: -10%;
-            left: 20%;
-            background: var(--primary);
-        }
-
-        .hero-glow:nth-child(2) {
-            bottom: -10%;
-            right: 20%;
-            background: var(--accent);
-            animation-delay: 2s;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 800px;
-        }
-
-        .hero-logo-wrapper {
-            margin-bottom: 2.5rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .hero-logo-custom {
-            width: 140px;
-            height: 140px;
-            border-radius: 28px;
-            object-fit: contain;
-            animation: float 6s ease-in-out infinite;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            margin-bottom: 2.5rem;
-            font-size: 14px;
-            color: var(--foreground);
-            font-weight: 500;
-        }
-
-        .audio-wave {
-            display: flex;
-            gap: 3px;
-            height: 16px;
-            align-items: center;
-        }
-
-        .audio-wave span {
-            width: 3px;
-            background: var(--primary);
-            border-radius: 2px;
-            animation: wave 1.2s ease-in-out infinite;
-        }
-
-        .audio-wave span:nth-child(1) { height: 8px; animation-delay: 0s; }
-        .audio-wave span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
-        .audio-wave span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
-        .audio-wave span:nth-child(4) { height: 16px; animation-delay: 0.45s; }
-        .audio-wave span:nth-child(5) { height: 8px; animation-delay: 0.6s; }
-
-        .hero h1 {
-            font-size: clamp(3rem, 7vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--muted-foreground);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
-        }
-
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--muted-foreground);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .trust-badge svg {
-            width: 20px;
-            height: 20px;
-            color: var(--primary);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 8rem 0;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(255,255,255,0.05);
-            color: var(--primary);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-
-        .section h2 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .section p {
-            font-size: 1.125rem;
-            color: var(--muted-foreground);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        
-
-
-        /* Problem Section */
-        .problems-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .problem-card {
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-        }
-
-        .problem-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .problem-icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            color: var(--secondary);
-        }
-
-        .problem-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .problem-card p {
-            color: var(--muted-foreground);
-            line-height: 1.7;
-        }
-
-        /* Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .feature-card:nth-child(1):hover { border-color: var(--primary); }
-        .feature-card:nth-child(2):hover { border-color: var(--accent); }
-        .feature-card:nth-child(3):hover { border-color: var(--secondary); }
-        .feature-card:nth-child(4):hover { border-color: var(--lavender); }
-        .feature-card:nth-child(5):hover { border-color: var(--primary); }
-        .feature-card:nth-child(6):hover { border-color: var(--accent); }
-        .feature-card:nth-child(7):hover { border-color: var(--secondary); }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1);
-        }
-
-        .feature-card:nth-child(1) .feature-icon { background: rgba(150, 200, 180, 0.1); color: var(--primary); }
-        .feature-card:nth-child(2) .feature-icon { background: rgba(135, 206, 235, 0.1); color: var(--accent); }
-        .feature-card:nth-child(3) .feature-icon { background: rgba(255, 182, 193, 0.1); color: var(--secondary); }
-        .feature-card:nth-child(4) .feature-icon { background: rgba(221, 160, 221, 0.1); color: var(--lavender); }
-        .feature-card:nth-child(5) .feature-icon { background: rgba(150, 200, 180, 0.1); color: var(--primary); }
-        .feature-card:nth-child(6) .feature-icon { background: rgba(135, 206, 235, 0.1); color: var(--accent); }
-        .feature-card:nth-child(7) .feature-icon { background: rgba(255, 182, 193, 0.1); color: var(--secondary); }
-
-        /* Team Section */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .team-card {
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .team-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .team-image-wrapper {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 1.5rem;
-            border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
-            background-size: 200% 200%;
-            animation: gradient-shift 4s ease infinite;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-
-        .team-image-wrapper img {
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--background);
+            animation: slideshow 9s infinite;
         }
 
-        .team-avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        .slideshow-img:nth-child(2) {
+            animation-delay: 3s;
         }
 
-        .team-avatar.sanjana { background: var(--gradient-secondary); }
-        .team-avatar.ayush { background: var(--gradient-primary); }
-        .team-avatar.divyansh { background: var(--gradient-secondary); filter: hue-rotate(45deg); }
-
-        .team-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--foreground);
-        }
-
-        .team-role {
-            font-size: 0.9rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
-        .team-bio {
-             font-size: 0.9rem;
-             color: var(--muted-foreground);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--card);
-            border-top: 1px solid var(--border);
-            padding: 6rem 0 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand .logo {
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-brand p {
-            color: var(--muted-foreground);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            max-width: 300px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted-foreground);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--primary);
-            color: var(--primary-foreground);
-            transform: translateY(-3px);
-        }
-
-        .footer-section h4 {
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--foreground);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: var(--muted-foreground);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-bottom p {
-            color: var(--muted-foreground);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.1); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-        }
-
-        @keyframes wave {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(0.4); }
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(10, 10, 15, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                border-bottom: 1px solid var(--border);
-                transform: translateY(-20px);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-        /* Special Try AI Button */
-        .ai-btn {
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1);
-            background-size: 200% 200%;
-            animation: gradient-shift 3s ease infinite;
-            color: white !important;
-            padding: 12px 24px !important;
-            border-radius: 25px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ai-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
-            color: white !important;
-        }
-
-        .ai-btn::before {
-            content: '🤖 ';
-        }
-
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 0 2rem;
-            }
-
-            .trust-badges {
-                flex-direction: column;
-                align-items: center;
-                gap: 1.5rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-                text-align: center;
-            }
-
-            .footer-brand p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
+        .slideshow-img:nth-child(3) {
+            animation-delay: 6s;
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="logo">
-                <img src="photo_6064604666927975870_y.jpg" alt="MUMAA Logo" class="logo-img-custom">
-                <span class="logo-text">MUMAA</span>
+<body class="antialiased selection:bg-teal-500 selection:text-white">
+    <div class="stars"></div>
+
+    <!-- Navigation -->
+    <nav class="flex items-center justify-between px-6 py-6 max-w-7xl mx-auto w-full relative z-50">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+            <div class="relative w-10 h-10">
+                <img src="photo_6064604666927975870_y.jpg" alt="Mumaa Logo" class="w-full h-full object-contain rounded-lg">
+            </div>
+            <span class="text-2xl font-extrabold tracking-tight text-white group-hover:text-sage transition-colors">Mumaa</span>
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden xl:flex items-center gap-8 text-sm font-bold text-gray-400">
+            <a href="#hero" class="hover:text-white transition-colors">Home</a>
+            <a href="#age-groups" class="hover:text-white transition-colors">Child Age Guide</a>
+            <a href="#features" class="hover:text-white transition-colors">Features</a>
+            <a href="#team" class="hover:text-white transition-colors">Team</a>
+            <a href="#privacy" class="hover:text-white transition-colors">Privacy</a>
+        </div>
+
+        <!-- Auth Buttons -->
+        <div class="flex items-center gap-4">
+            <!-- Try AI Button -->
+            <a href="chatbot.html" target="_blank" class="hidden md:flex items-center gap-2 px-5 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-200 text-sm font-bold hover:bg-purple-500 hover:text-white hover:border-transparent transition-all shadow-[0_0_15px_rgba(168,85,247,0.15)] group">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>Try AI</span>
             </a>
             
-            <ul class="nav-links">
-                
-                <li><a href="#about">About</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#team">Team</a></li>
-                <li><a href="chatbot.html" class="btn btn-primary" style="padding: 8px 20px; color: var(--primary-foreground);">Try AI</a></li>
-                <li><a href="ai.html" class="btn btn-primary" style="padding: 8px 20px; color: var(--primary-foreground);">Mumaa</a></li>
-                <li><a href="#waitlist" class="btn btn-primary" style="padding: 8px 20px; color: var(--primary-foreground);">Join Waitlist</a></li>
-            </ul>
+            <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
             
-            <div class="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+            <!-- Mumaa AI Teacher Button -->
+            <a href="ai.html" class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-sage text-[#0B101B] text-sm font-extrabold hover:bg-white transition-all shadow-[0_0_15px_rgba(167,215,197,0.3)] hover:scale-105">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                </svg>
+                <span>Mumaa AI Teacher</span>
+            </a>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero bg-mesh">
-        <div class="hero-glow"></div>
-        <div class="hero-glow"></div>
-        
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-logo-wrapper">
-                    <img src="photo_6064604666927975870_y.jpg" alt="MUMAA Logo" class="hero-logo-custom">
-                </div>
-                
-                <div class="hero-badge">
-                    <div class="audio-wave">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    AI-Powered Voice Understanding
-                </div>
-                
-                <h1>
-                    Understand Your Child's<br>
-                    <span class="text-gradient-primary">Every Emotion</span>
-                </h1>
-                
-                <p>
-                    MUMAA guides parents with AI-powered voice understanding—
-so you can react with patience, care, and confidence,
-without cameras or screen dependency.
-                </p>
-                
-                <div class="hero-buttons">
+    <header id="hero" class="relative max-w-7xl mx-auto px-6 pt-12 pb-24 grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Text Content -->
+        <div class="relative z-10 order-2 lg:order-1">
+            <h1 class="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.15] mb-6 tracking-tight">
+                Maa sab samajhti hai, Par <span class="text-sage inline-block relative">
+                    Mumaa
+                    <!-- Subtle underline decoration -->
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-sage opacity-50" viewBox="0 0 100 10" preserveAspectRatio="none">
+                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="2" fill="none" />
+                    </svg>
+                </span>—maa ko samajhti hai
+            </h1>
+            <p class="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed font-medium">
+                AI-powered guidance for every stage of your child's growth, without cameras or guilt.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <button class="px-8 py-3.5 rounded-full bg-sage text-[#0B101B] font-bold hover:bg-white transition-all shadow-[0_0_20px_rgba(167,215,197,0.4)] transform hover:scale-105">
                     <a href="MummA_Cry_Analyzer (2).apk" download class="btn btn-primary">Download CryAnalyser</a>
-                    <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
-                    <a href="#features" class="btn btn-outline">Learn How It Works</a>
-                </div>
-                
-                <div class="trust-badges">
-                    <div class="trust-badge">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                        </svg>
-                        Privacy First
-                    </div>
-                    <div class="trust-badge">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                        Pediatrician Backed
-                    </div>
-                    <div class="trust-badge">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M9.5 16.5c0 2 2.5 3.5 2.5 3.5s2.5-1.5 2.5-3.5-1 3.5-2.5 3.5-2.5-1.5-2.5-3.5zM8.5 12c0 2 2.5 3.5 2.5 3.5s2.5-1.5 2.5-3.5S11 15.5 11 15.5 8.5 14 8.5 12z"/>
-                        </svg>
-                        AI-Powered Insights
-                    </div>
-                </div>
+                </button>
+                <button class="px-8 py-3.5 rounded-full border border-gray-700 bg-white/5 text-gray-300 font-semibold hover:border-gray-500 hover:bg-white/10 hover:text-white transition-all backdrop-blur-sm">
+                    How It Works
+                </button>
             </div>
         </div>
-    </section>
 
-    <!-- Problem Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">The Challenge</span>
-                <h2>
-                    Parenting Shouldn't Feel Like<br>
-                    <span class="text-gradient-secondary">Solving a Mystery</span>
-                </h2>
-                <p>
-                   When your baby cries, questions pile up.
-Hunger? Discomfort? Sleep?
-You just want the right answer—quickly, calmly, and with confidence.
-                </p>
-            </div>
+        <!-- Hero Image -->
+        <div class="relative order-1 lg:order-2 flex justify-center items-center">
+            <!-- Glow Effect Behind -->
+            <div class="absolute w-[120%] h-[120%] bg-gradient-to-tr from-teal-500/20 via-purple-500/10 to-transparent blur-[80px] rounded-full"></div>
             
-            <div class="problems-grid">
-                <div class="problem-card glass-card">
-                    <div class="problem-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <h3>Sleepless Nights</h3>
-                    <p>Endless nights wondering if your baby's cry means hunger, discomfort, or something more serious.</p>
-                </div>
-                
-                <div class="problem-card glass-card">
-                    <div class="problem-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-6h2v6zm0-8h-2V7h2v4z"/>
-                        </svg>
-                    </div>
-                    <h3>Guessing Games</h3>
-                    <p>Traditional monitors tell you your baby is crying, but not why—leaving you anxious and uncertain.</p>
-                </div>
-                
-                <div class="problem-card glass-card">
-                    <div class="problem-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                        </svg>
-                    </div>
-                    <h3>Information Overload</h3>
-                    <p>Conflicting parenting advice online makes it harder to trust your instincts when it matters most.</p>
-                </div>
-                
-                <div class="problem-card glass-card">
-                    <div class="problem-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <h3>Constant Screen Time</h3>
-                    <p>Camera-based monitors tether you to a screen, increasing anxiety instead of reducing it.</p>
-                </div>
+            <!-- Main Image container -->
+            <div class="relative w-full max-w-[550px] aspect-square flex items-center justify-center">
+                 <!-- Organic Womb Shape Container -->
+                 <div class="relative w-[90%] h-[90%] rounded-full overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10">
+                    <img src="pexels-daniel-reche-718241-1556706.jpg" 
+                         alt="Mother and Child" 
+                         class="slideshow-img transform scale-110 translate-y-2 filter brightness-[0.85] contrast-[1.1] saturate-[1.1]">
+                    <img src="pexels-suresh-photography-922908746-32761033.jpg" 
+                         alt="Mother and Child" 
+                         class="slideshow-img transform scale-110 translate-y-2 filter brightness-[0.85] contrast-[1.1] saturate-[1.1]">
+                    <img src="pexels-vika-glitter-392079-1648374.jpg" 
+                         alt="Mother and Child" 
+                         class="slideshow-img transform scale-110 translate-y-2 filter brightness-[0.85] contrast-[1.1] saturate-[1.1]">
+                    
+                    <!-- Overlay gradient for depth -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-[#0B101B]/60 via-transparent to-orange-200/20 mix-blend-overlay"></div>
+                    <div class="absolute inset-0 bg-radial-gradient from-transparent to-[#0B101B]/40"></div>
+                 </div>
+                 
+                 <!-- Sparkles -->
+                 <div class="absolute top-10 right-20 text-pink-200 opacity-80 text-xl animate-pulse">♥</div>
+                 <div class="absolute bottom-24 left-10 text-yellow-100 opacity-60 text-2xl animate-bounce" style="animation-duration: 3s;">✦</div>
+                 <div class="absolute top-1/2 -right-0 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_10px_white] animate-pulse"></div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Meet MUMAA</span>
-                <h2>
-                    Your Intelligent<br>
-                    <span class="text-gradient-primary">Parenting Companion</span>
-                </h2>
-                <p>
-                    MUMAA is an AI-driven, voice-based platform designed to support parents from infancy 
-                    through middle childhood. We use intelligent audio analysis—not cameras—to help you 
-                    understand and respond to your child's needs with calm confidence.
-                </p>
+    <!-- Age Groups Section -->
+    <section id="age-groups" class="max-w-7xl mx-auto px-6 py-10">
+        <h2 class="text-center text-2xl md:text-3xl font-bold mb-12 tracking-wide">
+            Navigate Parenthood with <span class="text-sage">Confidence</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 0-6 Months -->
+            <div class="card-gradient rounded-2xl p-6 group cursor-pointer relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <!-- Colorful Icon -->
+                <div class="w-12 h-12 rounded-full bg-[#1e293b] flex items-center justify-center mb-5 shadow-inner border border-white/5 relative z-10">
+                     <!-- Baby/Moon Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-300" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9.5 2A10.5 10.5 0 0019 14.5 10.5 10.5 0 009.5 2zM5.5 14.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" opacity="0.8"/>
+                        <path d="M15 16a4 4 0 01-4-4 1 1 0 00-2 0 6 6 0 108 8 1 1 0 000-2z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2 text-white relative z-10">0–6 Months</h3>
+                <p class="text-[13px] text-gray-400 leading-relaxed relative z-10">Sleep, feeding & crying basics. Understanding early cues.</p>
+            </div>
+
+            <!-- 6-12 Months -->
+            <div class="card-gradient rounded-2xl p-6 group cursor-pointer relative overflow-hidden">
+                 <div class="absolute inset-0 bg-gradient-to-b from-teal-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="w-12 h-12 rounded-full bg-[#1e293b] flex items-center justify-center mb-5 shadow-inner border border-white/5 relative z-10">
+                    <!-- Bottle Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-300" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 5.42 2.997 2.997 0 011.432 4.985 2.997 2.997 0 01-1.554 4.906A5.5 5.5 0 015 22h14a5.5 5.5 0 01-2.732-4.689 2.997 2.997 0 01-1.554-4.906 2.997 2.997 0 011.432-4.985A18.868 18.868 0 0113.822 6H16a1 1 0 110-2h-3V3a1 1 0 011-1H7zm1.066 11.23a1.5 1.5 0 110 2.54 1.5 1.5 0 010-2.54z" clip-rule="evenodd" opacity="0.9"/>
+                        <path d="M12 2C9 2 8 4 8 6v14h8V6c0-2-1-4-4-4z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2 text-white relative z-10">6–12 Months</h3>
+                <p class="text-[13px] text-gray-400 leading-relaxed relative z-10">Starting solids, first milestones, and motor skills.</p>
+            </div>
+
+            <!-- 1-3 Years -->
+            <div class="card-gradient rounded-2xl p-6 group cursor-pointer relative overflow-hidden">
+                 <div class="absolute inset-0 bg-gradient-to-b from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="w-12 h-12 rounded-full bg-[#1e293b] flex items-center justify-center mb-5 shadow-inner border border-white/5 relative z-10">
+                    <!-- Toy/Duck Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-300" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.42 2.15A1 1 0 0011 3v2.17a3.001 3.001 0 001.27 5.64l.65.11a1 1 0 01.83 1.16l-.28 1.94a1 1 0 01-1.16.83l-.65-.11a3.001 3.001 0 00-3.48 2.5l-.04.25a3 3 0 003.88 3.39l.13-.03a1 1 0 011.16.83l.28 1.94a1 1 0 01-.83 1.16l-.13.03a5.001 5.001 0 01-6.14-5.07l.04-.25a5 5 0 015.8-4.16l.65.11a1 1 0 01.83-1.16l-.28-1.94a1 1 0 01-1.16-.83l-.65-.11A5.001 5.001 0 019 4.17V3a3 3 0 013.42-.85z" />
+                         <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.4"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2 text-white relative z-10">1–3 Years</h3>
+                <p class="text-[13px] text-gray-400 leading-relaxed relative z-10">Speech, behavior, potty training, and nutrition basics.</p>
+            </div>
+
+            <!-- 3-5 Years -->
+            <div class="card-gradient rounded-2xl p-6 group cursor-pointer relative overflow-hidden">
+                 <div class="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="w-12 h-12 rounded-full bg-[#1e293b] flex items-center justify-center mb-5 shadow-inner border border-white/5 relative z-10">
+                    <!-- Heart/School Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-300" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2 text-white relative z-10">3–5 Years</h3>
+                <p class="text-[13px] text-gray-400 leading-relaxed relative z-10">Learning, growth, emotions, and school prep.</p>
+            </div>
+
+            <div class="card-gradient rounded-2xl p-6 group cursor-pointer relative overflow-hidden">
+                 <div class="absolute inset-0 bg-gradient-to-b from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="w-12 h-12 rounded-full bg-[#1e293b] flex items-center justify-center mb-5 shadow-inner border border-white/5 relative z-10">
+                    <!-- Heart/School Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-300" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold mb-2 text-white relative z-10">5–7 Years</h3>
+                <p class="text-[13px] text-gray-400 leading-relaxed relative z-10">Learning difficulty (reading, writing, maths),School fear,Low confidence</p>
             </div>
         </div>
-    </section>
 
-    <!-- Demo Video Section -->
-    <section class="section" style="padding: 4rem 0;">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">See It In Action</span>
-                <h2>Watch MUMAA<br><span class="text-gradient-primary">In Action</span></h2>
-                <p>Discover how MUMAA helps parents understand their children better.</p>
-            </div>
-            <div style="max-width: 900px; margin: 0 auto;">
-                <div class="glass-card" style="padding: 2rem; overflow: hidden;">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
+        <!-- Slider Pagination Dots (Visual Only) -->
+        <div class="flex justify-center gap-1.5 mt-10">
+            <div class="w-6 h-1 bg-white rounded-full opacity-90 shadow-[0_0_8px_rgba(255,255,255,0.8)]"></div>
+            <div class="w-6 h-1 bg-white rounded-full opacity-20"></div>
+            <div class="w-6 h-1 bg-white rounded-full opacity-20"></div>
+            <div class="w-6 h-1 bg-white rounded-full opacity-20"></div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Features</span>
-                <h2>Everything You Need<br><span class="text-gradient-secondary">For Peace of Mind</span></h2>
+    <section id="features" class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-center text-2xl md:text-3xl font-bold mb-4 tracking-wide">
+            AI-Powered Features
+        </h2>
+        <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Advanced technology to understand and support your child's needs</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cry Pattern Analysis -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-start hover:bg-white/5 transition-all cursor-pointer group">
+                <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(59,130,246,0.15)] group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-200" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">Cry Pattern Analysis</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Advanced AI distinguishes hunger from discomfort, tiredness from distress by analyzing cry patterns.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card glass-card">
-                    <div class="feature-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <h3>Cry Pattern Analysis</h3>
-                    <p>Advanced AI that understands the nuances in your baby's cries—distinguishing hunger from discomfort, tiredness from distress.</p>
+
+            <!-- Emotional Intelligence -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-start hover:bg-white/5 transition-all cursor-pointer group">
+                <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(168,85,247,0.15)] group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-purple-200" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                    </svg>
                 </div>
-                
-                <div class="feature-card glass-card">
-                    <div class="feature-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                    <h3>Emotional Intelligence</h3>
-                    <p>Detects emotional tones as your child grows, helping you understand their feelings even before they can express them clearly.</p>
+                <h3 class="text-xl font-bold mb-3 text-white">Emotional Intelligence</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Detects emotional tones as your child grows, understanding feelings before they can express them clearly.</p>
+            </div>
+
+            <!-- Developmental Insights -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-start hover:bg-white/5 transition-all cursor-pointer group">
+                <div class="w-14 h-14 rounded-2xl bg-green-500/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-200" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
                 </div>
-                
-                <div class="feature-card glass-card">
-                    <div class="feature-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </div>
-                    <h3>Developmental Insights</h3>
-                    <p>Age-appropriate guidance based on behavioral patterns, supporting healthy development from infancy through childhood.</p>
+                <h3 class="text-xl font-bold mb-3 text-white">Developmental Insights</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Age-appropriate guidance based on behavioral patterns, supporting healthy development from infancy through childhood.</p>
+            </div>
+
+            <!-- Conversational AI -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-start hover:bg-white/5 transition-all cursor-pointer group">
+                <div class="w-14 h-14 rounded-2xl bg-teal-500/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(20,184,166,0.15)] group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-teal-200" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+                    </svg>
                 </div>
-                
-                <div class="feature-card glass-card">
-                    <div class="feature-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-                        </svg>
-                    </div>
-                    <h3>Conversational AI</h3>
-                    <p>Get personalized parenting advice through natural conversation—like having an expert available 24/7.</p>
+                <h3 class="text-xl font-bold mb-3 text-white">Conversational AI</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Get personalized parenting advice through natural conversation—like having an expert available 24/7.</p>
+            </div>
+
+            <!-- Real-Time Alerts -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-start hover:bg-white/5 transition-all cursor-pointer group">
+                <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(239,68,68,0.15)] group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-red-200" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                    </svg>
                 </div>
-                
-                <div class="feature-card glass-card">
-                    <div class="feature-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                        </svg>
-                    </div>
-                    <h3>Sleep Pattern Tracking</h3>
-                    <p>Monitor and analyze sleep patterns to help establish healthy routines and identify potential sleep issues early.</p>
-                </div>
-                
-                <div class="feature-card glass-card">
-                    <div class="feature-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                        </svg>
-                    </div>
-                    <h3>Privacy-First Design</h3>
-                    <p>No cameras, no video recording. All data is encrypted and processed securely, keeping your family's privacy intact.</p>
-                </div>
-                
-                <div class="feature-card glass-card">
-                    <div class="feature-icon">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="32" height="32">
-                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
-                        </svg>
-                    </div>
-                    <h3>Real-Time Alerts</h3>
-                    <p>Instant notifications when your child needs attention, with context about what might be causing distress.</p>
-                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">Real-Time Alerts</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Instant notifications when your child needs attention, with context about what might be causing distress.</p>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section class="section" id="team">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Our Team</span>
-                <h2>Driven by Passion,<br><span class="text-gradient-primary">Guided by Care</span></h2>
-                <p>Meet the visionaries building the future of parenting support.</p>
+    <section id="team" class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-center text-2xl md:text-3xl font-bold mb-4 tracking-wide">
+            Meet Our <span class="text-sage">Team</span>
+        </h2>
+        <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Passionate individuals building the future of parenting support</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <!-- Sanjana -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-center text-center hover:bg-white/5 transition-all group">
+                <div class="w-32 h-32 rounded-full mb-6 overflow-hidden border-4 border-sage/30 shadow-[0_0_30px_rgba(167,215,197,0.2)] group-hover:border-sage/50 transition-all">
+                    <img src="Gemini_Generated_Image_7en2cs7en2cs7en2.png" alt="Sanjana" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-white">Sanjana</h3>
+                <p class="text-sage text-sm font-semibold mb-3">Founder</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Visionary leader passionate about empowering parents with technology.</p>
+                <a href="https://www.linkedin.com/in/sanjanamishra1208/" target="_blank" class="flex items-center gap-2 text-sage hover:text-white transition-colors justify-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <span class="text-sm font-semibold">LinkedIn</span>
+                </a>
             </div>
-            
-            <div class="team-grid">
-                <!-- Sanjana -->
-                <div class="team-card glass-card">
-                    <div class="team-image-wrapper">
-                         <img src="Gemini_Generated_Image_7en2cs7en2cs7en2.png" alt="Sanjana" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-                    </div>
-                    <h3>Sanjana</h3>
-                    <p class="team-role">Founder & CEO</p>
-                    <p class="team-bio">Visionary leader passionate about empowering parents with technology.</p>
-                    <a href="https://www.linkedin.com/in/sanjanamishra1208/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.3s;">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                            <circle cx="4" cy="4" r="2"/>
-                        </svg>
-                        LinkedIn
-                    </a>
+
+            <!-- Ayush -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-center text-center hover:bg-white/5 transition-all group">
+                <div class="w-32 h-32 rounded-full mb-6 overflow-hidden border-4 border-blue-400/30 shadow-[0_0_30px_rgba(96,165,250,0.2)] group-hover:border-blue-400/50 transition-all">
+                    <img src="photo_6066598017084624042_y.jpg" alt="Ayush" class="w-full h-full object-cover">
                 </div>
-                
-                <!-- Ayush -->
-                <div class="team-card glass-card">
-                    <div class="team-image-wrapper">
-                         <img src="photo_6066598017084624042_y.jpg" alt="Ayush" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-                    </div>
-                    <h3>Ayush</h3>
-                    <p class="team-role">Co-Founder & CTO</p>
-                    <p class="team-bio">Driving strategy and innovation to bring MUMAA to families worldwide.</p>
-                    <a href="https://www.linkedin.com/in/ayushr20/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.3s;">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                            <circle cx="4" cy="4" r="2"/>
-                        </svg>
-                        LinkedIn
-                    </a>
+                <h3 class="text-xl font-bold mb-2 text-white">Ayush</h3>
+                <p class="text-blue-300 text-sm font-semibold mb-3">Co-Founder</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Driving strategy and innovation to bring MUMAA to families worldwide.</p>
+                <a href="https://www.linkedin.com/in/ayushr20/" target="_blank" class="flex items-center gap-2 text-blue-300 hover:text-white transition-colors justify-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <span class="text-sm font-semibold">LinkedIn</span>
+                </a>
+            </div>
+
+            <!-- Divyansh -->
+            <div class="card-gradient rounded-3xl p-8 flex flex-col items-center text-center hover:bg-white/5 transition-all group">
+                <div class="w-32 h-32 rounded-full mb-6 overflow-hidden border-4 border-purple-400/30 shadow-[0_0_30px_rgba(192,132,252,0.2)] group-hover:border-purple-400/50 transition-all">
+                    <img src="WhatsApp Image 2026-02-05 at 23.48.11.jpeg" alt="Divyansh" class="w-full h-full object-cover">
                 </div>
+                <h3 class="text-xl font-bold mb-2 text-white">Divyansh</h3>
+                <p class="text-purple-300 text-sm font-semibold mb-3">Director</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">Ensuring operational excellence and smooth delivery of our services.</p>
+                <a href="https://www.linkedin.com/in/divyansh-kumar-a4529922a/" target="_blank" class="flex items-center gap-2 text-purple-300 hover:text-white transition-colors justify-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <span class="text-sm font-semibold">LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Hero/Testimonial Section -->
+    <section class="max-w-7xl mx-auto px-6 py-20 pb-32">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+             <!-- Bottom Text -->
+             <div>
+                 <div class="inline-block mb-4">
+                     <span class="text-yellow-200 text-2xl animate-pulse">✦</span>
+                 </div>
+                <h2 class="text-3xl md:text-5xl font-bold leading-tight mb-6">
+                    ‘You’re Not Failing. <span class="text-sage">You’re Learning.</span>’
+                </h2>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed max-w-lg">
+                    Navigating parenthood is overwhelming. Our calm, expert-backed guidance meets you with empathy at every step—no cameras, no comparison, just support.
+                </p>
+                <button class="px-8 py-3.5 rounded-full bg-sage text-[#0B101B] font-bold hover:bg-white transition-all shadow-[0_0_20px_rgba(167,215,197,0.3)]">
+                    Get Personalized Guidance
+                </button>
+            </div>
+
+            <!-- Bottom Image -->
+            <div class="relative flex justify-center lg:justify-end items-center">
+                <!-- Glow Effect -->
+                <div class="absolute inset-0 bg-orange-400/10 blur-[80px] rounded-full transform translate-x-10"></div>
                 
-                <!-- Divyansh -->
-                <div class="team-card glass-card">
-                    <div class="team-image-wrapper">
-                         <img src="WhatsApp Image 2026-02-05 at 23.48.11.jpeg" alt="Divyansh" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-                    </div>
-                    <h3>Divyansh</h3>
-                    <p class="team-role">Director of Operations</p>
-                    <p class="team-bio">Ensuring operational excellence and smooth delivery of our services.</p>
-                    <a href="https://www.linkedin.com/in/divyansh-kumar-a4529922a/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.3s;">
-                        <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                            <circle cx="4" cy="4" r="2"/>
-                        </svg>
-                        LinkedIn
-                    </a>
+                <!-- Masked Image -->
+                <div class="relative w-full max-w-[500px] aspect-[4/3] rounded-[40px] overflow-hidden border border-white/5 shadow-2xl">
+                     <!-- Image -->
+                    <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                         alt="Mother holding baby" 
+                         class="w-full h-full object-cover transform scale-105 brightness-[0.85] contrast-[1.1] hover:scale-100 transition-all duration-700">
+                    
+                    <!-- Overlay to match dark theme -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0B101B]/80 via-transparent to-transparent"></div>
+                    
+                     <!-- Floating elements -->
+                    <div class="absolute top-10 left-10 text-pink-300 opacity-60 text-2xl animate-bounce" style="animation-duration: 4s;">♥</div>
+                    <div class="absolute bottom-20 right-10 text-white opacity-40 text-xl">✦</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Privacy Section -->
-    <section class="section" id="privacy">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">Privacy First</span>
-                <h2>Your Family's Privacy is Sacred</h2>
-                <p>
-                    Unlike traditional baby monitors, MUMAA doesn't just alert you—it helps you understand. 
-                    No cameras. No constant screen exposure. Just intelligent, privacy-first insights.
-                </p>
+    <!-- Bottom Fade for seamless scrolling feel -->
+    <div class="w-full h-24 bottom-fade"></div>
+
+    <!-- How It Works Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-center text-2xl md:text-3xl font-bold mb-4 tracking-wide">
+            How <span class="text-sage">MUMAA AI</span> Works
+        </h2>
+        <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Simple steps to get personalized parenting support</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="card-gradient rounded-3xl p-8 text-center group hover:bg-white/5 transition-all">
+                <div class="w-16 h-16 rounded-full bg-sage/20 flex items-center justify-center mx-auto mb-6 text-2xl font-bold text-sage group-hover:scale-110 transition-transform">1</div>
+                <h3 class="text-xl font-bold mb-3 text-white">Setup Profile</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Tell us about your child's age, needs, and preferences for personalized guidance.</p>
+            </div>
+
+            <div class="card-gradient rounded-3xl p-8 text-center group hover:bg-white/5 transition-all">
+                <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-6 text-2xl font-bold text-blue-300 group-hover:scale-110 transition-transform">2</div>
+                <h3 class="text-xl font-bold mb-3 text-white">Ask Questions</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Chat with our AI or use voice commands to get instant answers to your parenting questions.</p>
+            </div>
+
+            <div class="card-gradient rounded-3xl p-8 text-center group hover:bg-white/5 transition-all">
+                <div class="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-6 text-2xl font-bold text-purple-300 group-hover:scale-110 transition-transform">3</div>
+                <h3 class="text-xl font-bold mb-3 text-white">Get Support</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Receive expert-backed advice, real-time alerts, and developmental insights tailored to your child.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy & Security Section -->
+    <section id="privacy" class="max-w-7xl mx-auto px-6 py-16">
+        <div class="card-gradient rounded-[40px] p-12 text-center">
+            <div class="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-300" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Privacy-First Approach</h2>
+            <p class="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed mb-6">
+                No cameras. No video recording. Your family's data is encrypted and secure. We believe in supporting parents without compromising privacy.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm">
+                <div class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span>End-to-End Encryption</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span>No Camera Required</span>
+                </div>
+                <div class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    <span>GDPR Compliant</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="section" id="waitlist">
-        <div class="container">
-            <div class="glass-card" style="padding: 4rem 2rem; text-align: center; border-color: var(--primary);">
-                <h2 style="margin-bottom: 1rem;">Ready to Transform Your Parenting Journey?</h2>
-                <p style="margin-bottom: 2rem;">Join thousands of parents who are already on the waitlist for MUMAA.</p>
-                <div style="max-width: 500px; margin: 0 auto;">
-                    <form style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-                        <input type="email" placeholder="Enter your email" required style="flex: 1; min-width: 250px; padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--foreground); font-size: 1rem;">
-                        <button type="submit" class="btn btn-primary" style="font-size: 1rem; padding: 16px 32px;">Join Waitlist</button>
-                    </form>
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="card-gradient rounded-[40px] p-12 md:p-16 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-sage/10 via-transparent to-purple-500/10"></div>
+            <div class="relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Journey?</h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Join thousands of parents using MUMAA for confident, calm parenting.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="px-10 py-4 rounded-full bg-sage text-[#0B101B] font-bold hover:bg-white transition-all shadow-[0_0_25px_rgba(167,215,197,0.4)] transform hover:scale-105">
+                        Get Started Free
+                    </button>
+                    <button class="px-10 py-4 rounded-full border border-gray-600 bg-white/5 text-white font-semibold hover:border-gray-400 hover:bg-white/10 transition-all">
+                        Watch Demo
+                    </button>
                 </div>
-                <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.7;">Early access coming soon.</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <img src="photo_6064604666927975870_y.jpg" alt="MUMAA Logo" class="logo-img-custom">
-                        <span class="logo-text">MUMAA</span>
-                    </a>
-                    <p>AI-powered voice understanding for parents. Helping you respond calmly and confidently to your child's needs.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
-                            </svg>
+    <footer class="bg-[#0a0e16] border-t border-white/5 mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="photo_6064604666927975870_y.jpg" alt="Mumaa" class="w-10 h-10 rounded-lg">
+                        <span class="text-2xl font-extrabold text-white">Mumaa</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">AI-powered parenting guidance for every stage of your child's growth.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-sage hover:border-sage/50 transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
                         </a>
-                        <a href="https://www.linkedin.com/company/mumaa/" class="social-link">
-                            <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                                <circle cx="4" cy="4" r="2"/>
-                            </svg>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-sage hover:border-sage/50 transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                         </a>
-                        <a href="#" class="social-link">
-                            <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                                <path d="m16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                            </svg>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-sage hover:border-sage/50 transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </a>
                     </div>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Product</h4>
-                    <ul class="footer-links">
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#features">How It Works</a></li>
-                        <li><a href="#privacy">Privacy</a></li>
-                        <li><a href="#waitlist">Pricing</a></li>
+
+                <!-- Product -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Product</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Download App</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#team">Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Contact</a></li>
+
+                <!-- Company -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Company</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Team</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Contact</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Community</a></li>
+
+                <!-- Resources -->
+                <div>
+                    <h3 class="text-white font-bold mb-4">Resources</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-sage transition-colors">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2026 MUMAA. All rights reserved.</p>
-                <div style="display: flex; gap: 1.5rem;">
-                     <a href="#" style="color: var(--muted-foreground); text-decoration: none; font-size: 0.9rem;">Terms</a>
-                     <a href="#" style="color: var(--muted-foreground); text-decoration: none; font-size: 0.9rem;">Privacy</a>
-                </div>
-                <p>Made with ❤️ for parents everywhere</p>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">&copy; 2024 Mumaa. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">Made with <span class="text-red-400">♥</span> for parents everywhere</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const target = document.querySelector(targetId);
-                if (target) {
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Mobile menu toggle
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.section h2, .problem-card, .feature-card, .team-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
