@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUMAA Chat - AI Parenting Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.puter.com/v2/"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=jQZ2zCqM"></script>
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        .chat-scroll::-webkit-scrollbar { width: 6px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+        .sidebar { transition: transform 0.3s ease; }
+        .sidebar.closed { transform: translateX(-100%); }
+        @media (max-width: 768px) {
+            .sidebar { position: absolute; z-index: 50; height: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-[#0f1419] text-white h-screen overflow-hidden">
+    
+    <div class="flex h-screen relative">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar w-64 bg-[#1a1f2e] border-r border-gray-800 flex flex-col">
+            <div class="p-4 border-b border-gray-800">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="photo_6064604666927975870_y.jpg" alt="MUMAA" class="w-8 h-8 rounded-lg">
+                    <span class="text-xl font-bold">MUMAA</span>
+                </div>
+                <button onclick="newChat()" class="w-full bg-teal-600 hover:bg-teal-500 text-white py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    New Chat
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-3">
+                <div class="text-xs text-gray-500 mb-2 px-2">Recent Chats</div>
+                <div id="chat-history" class="space-y-1"></div>
+            </div>
+            
+            <div class="p-4 border-t border-gray-800">
+                <button onclick="toggleSettings()" class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-800 flex items-center gap-2 text-sm">
+                    <i data-lucide="settings" class="w-4 h-4"></i>
+                    <span id="user-display">Setup Profile</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <div class="h-16 border-b border-gray-800 flex items-center justify-between px-6">
+                <button onclick="toggleSidebar()" class="p-2 hover:bg-gray-800 rounded-lg transition md:block">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+                <div>
+                    <h2 class="font-semibold">Mumaa AI Assistant</h2>
+                    <p class="text-xs text-gray-400" id="baby-info">Your parenting companion</p>
+                </div>
+                <button onclick="toggleSpeaker()" id="speaker-btn" class="p-2 hover:bg-gray-800 rounded-lg transition" title="Toggle voice responses">
+                    <i data-lucide="volume-2" class="w-5 h-5 text-teal-400"></i>
+                </button>
+            </div>
+
+            <!-- Messages -->
+            <div id="chat-container" class="flex-1 overflow-y-auto chat-scroll px-6 py-4">
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="text-center py-12">
+                        <div class="w-16 h-16 bg-teal-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="message-circle" class="w-8 h-8 text-teal-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Welcome to MUMAA</h3>
+                        <p class="text-gray-400 text-sm">Ask me anything about parenting, feeding, sleep, or baby care</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="border-t border-gray-800 p-4">
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-[#1a1f2e] rounded-2xl border border-gray-700 flex items-end gap-2 p-2">
+                        <button onclick="toggleVoice()" id="mic-btn" class="p-2 hover:bg-gray-700 rounded-xl transition">
+                            <i data-lucide="mic" class="w-5 h-5 text-gray-400"></i>
+                        </button>
+                        <textarea id="message-input" rows="1" placeholder="Ask about feeding, sleep, development..." 
+                            class="flex-1 bg-transparent border-none outline-none text-white px-3 py-2 resize-none max-h-32"
+                            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
+                        <button onclick="sendMessage()" class="bg-teal-600 hover:bg-teal-500 p-2 rounded-xl transition">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="flex gap-2 mt-2 text-xs text-gray-500">
+                        <button onclick="quickPrompt('feeding')" class="px-3 py-1 bg-gray-800 rounded-full hover:bg-gray-700">🍼 Feeding</button>
+                        <button onclick="quickPrompt('sleep')" class="px-3 py-1 bg-gray-800 rounded-full hover:bg-gray-700">😴 Sleep</button>
+                        <button onclick="quickPrompt('development')" class="px-3 py-1 bg-gray-800 rounded-full hover:bg-gray-700">👶 Development</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div class="bg-[#1a1f2e] border border-gray-700 w-full max-w-md p-6 rounded-2xl m-4">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Profile Setup</h2>
+                <button onclick="toggleSettings()" class="text-gray-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form onsubmit="saveProfile(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Mother's Name</label>
+                    <input type="text" id="mom-name" required class="w-full bg-[#0f1419] border border-gray-700 rounded-lg px-3 py-2 text-white focus:border-teal-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Baby's Name</label>
+                    <input type="text" id="baby-name" required class="w-full bg-[#0f1419] border border-gray-700 rounded-lg px-3 py-2 text-white focus:border-teal-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Baby's Date of Birth</label>
+                    <input type="date" id="baby-dob" required class="w-full bg-[#0f1419] border border-gray-700 rounded-lg px-3 py-2 text-white focus:border-teal-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Language</label>
+                    <select id="language" class="w-full bg-[#0f1419] border border-gray-700 rounded-lg px-3 py-2 text-white focus:border-teal-500 outline-none">
+                        <option value="hinglish">Hinglish</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white py-2 rounded-lg font-medium">Save Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const state = {
+            user: {
+                momName: localStorage.getItem('mumaa_momName') || '',
+                babyName: localStorage.getItem('mumaa_babyName') || '',
+                babyDOB: localStorage.getItem('mumaa_babyDOB') || '',
+                language: localStorage.getItem('mumaa_language') || 'hinglish'
+            },
+            messages: [],
+            isListening: false,
+            speakerEnabled: localStorage.getItem('mumaa_speaker') !== 'false'
+        };
+
+        const knowledgeBase = `You are Mumaa, an Indian parenting AI assistant. Give SHORT, practical advice (1-2 sentences max) for BOTH mother and baby.
+        
+        BABY CARE:
+        0-6 months: ONLY breast milk/formula. NO solids, water, honey.
+        6-9 months: Soft solids (rice cereal, mashed fruits/veggies). No salt/sugar.
+        9-12 months: Soft family foods, 3 meals + snacks. Avoid choking hazards.
+        
+        MOTHER CARE:
+        - Postpartum: Rest, nutritious food, stay hydrated, ask for help.
+        - Breastfeeding: Drink water, eat protein-rich foods (dal, paneer, eggs).
+        - Self-care: Sleep when baby sleeps, light exercise after 6 weeks, mental health matters.
+        - Nutrition: Warm foods, avoid junk, include ghee, nuts, green veggies.
+        
+        Address both mother's wellbeing AND baby's needs. Be warm, direct, and brief.`;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('closed');
+        }
+
+        function toggleSpeaker() {
+            state.speakerEnabled = !state.speakerEnabled;
+            localStorage.setItem('mumaa_speaker', state.speakerEnabled);
+            const btn = document.getElementById('speaker-btn');
+            const icon = state.speakerEnabled ? 'volume-2' : 'volume-x';
+            const color = state.speakerEnabled ? 'text-teal-400' : 'text-gray-500';
+            btn.innerHTML = `<i data-lucide="${icon}" class="w-5 h-5 ${color}"></i>`;
+            lucide.createIcons();
+        }
+
+        function init() {
+            if (state.user.babyDOB) {
+                const age = calculateAge(state.user.babyDOB);
+                document.getElementById('baby-info').textContent = `${state.user.babyName} • ${age.totalMonths} months`;
+                document.getElementById('user-display').textContent = state.user.momName;
+            } else {
+                setTimeout(() => toggleSettings(), 500);
+            }
+        }
+
+        function calculateAge(dob) {
+            const birth = new Date(dob);
+            const now = new Date();
+            let months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+            return { totalMonths: months, display: `${months} months` };
+        }
+
+        function toggleSettings() {
+            const modal = document.getElementById('settings-modal');
+            modal.classList.toggle('hidden');
+            if (state.user.momName) {
+                document.getElementById('mom-name').value = state.user.momName;
+                document.getElementById('baby-name').value = state.user.babyName;
+                document.getElementById('baby-dob').value = state.user.babyDOB;
+                document.getElementById('language').value = state.user.language;
+            }
+            lucide.createIcons();
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            state.user.momName = document.getElementById('mom-name').value;
+            state.user.babyName = document.getElementById('baby-name').value;
+            state.user.babyDOB = document.getElementById('baby-dob').value;
+            state.user.language = document.getElementById('language').value;
+
+            localStorage.setItem('mumaa_momName', state.user.momName);
+            localStorage.setItem('mumaa_babyName', state.user.babyName);
+            localStorage.setItem('mumaa_babyDOB', state.user.babyDOB);
+            localStorage.setItem('mumaa_language', state.user.language);
+
+            toggleSettings();
+            init();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('message-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            input.value = '';
+            addMessage('user', text);
+            addTypingIndicator();
+
+            const response = await getAIResponse(text);
+            removeTypingIndicator();
+            addMessage('ai', response);
+            if (state.speakerEnabled) {
+                speak(response);
+            }
+        }
+
+        function addMessage(sender, text) {
+            const container = document.getElementById('chat-container');
+            const welcome = container.querySelector('.text-center');
+            if (welcome) welcome.remove();
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'} max-w-3xl mx-auto`;
+            
+            msgDiv.innerHTML = `
+                <div class="${sender === 'user' ? 'bg-teal-600' : 'bg-[#1a1f2e]'} rounded-2xl px-4 py-3 max-w-[80%]">
+                    <p class="text-sm">${text}</p>
+                </div>
+            `;
+            
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const container = document.getElementById('chat-container');
+            const div = document.createElement('div');
+            div.id = 'typing';
+            div.className = 'flex justify-start max-w-3xl mx-auto';
+            div.innerHTML = '<div class="bg-[#1a1f2e] rounded-2xl px-4 py-3"><div class="flex gap-1"><div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div><div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay:0.1s"></div><div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style="animation-delay:0.2s"></div></div></div>';
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typing');
+            if (typing) typing.remove();
+        }
+
+        async function getAIResponse(query) {
+            if (!state.user.babyDOB) return "Please set up your profile first.";
+
+            const age = calculateAge(state.user.babyDOB);
+            const langInstruction = state.user.language === 'hindi' ? 'Respond in Hindi (Devanagari)' : 
+                                   state.user.language === 'english' ? 'Respond in English' : 
+                                   'Respond in Hinglish (Hindi-English mix)';
+
+            const prompt = `${knowledgeBase}\n\nMother: ${state.user.momName}\nBaby: ${state.user.babyName} (${age.totalMonths} months)\n${langInstruction}\n\nIMPORTANT: Answer in 1-2 short sentences only. Be direct and helpful.\n\nQuery: ${query}`;
+
+            try {
+                const response = await puter.ai.chat(prompt);
+                return typeof response === 'string' ? response : response.message?.content || response.text || String(response);
+            } catch (error) {
+                return "Sorry, I'm having trouble connecting. Please try again.";
+            }
+        }
+
+        function speak(text) {
+            if (!state.speakerEnabled || !text) return;
+            
+            console.log('Speaking:', text);
+            
+            // Try ResponsiveVoice first
+            if (typeof responsiveVoice !== 'undefined' && responsiveVoice.voiceSupport()) {
+                responsiveVoice.cancel();
+                const voice = state.user.language === 'hindi' ? 'Hindi Female' : 'UK English Female';
+                responsiveVoice.speak(text, voice, { 
+                    rate: 0.9,
+                    onstart: () => console.log('Speech started'),
+                    onend: () => console.log('Speech ended')
+                });
+            } else {
+                // Fallback to browser TTS
+                const synth = window.speechSynthesis;
+                synth.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = state.user.language === 'hindi' ? 'hi-IN' : 'en-IN';
+                utterance.rate = 0.9;
+                utterance.pitch = 1.0;
+                
+                // Wait for voices to load
+                const voices = synth.getVoices();
+                if (voices.length > 0) {
+                    const voice = voices.find(v => v.lang.includes(utterance.lang.split('-')[0]));
+                    if (voice) utterance.voice = voice;
+                }
+                
+                synth.speak(utterance);
+                console.log('Using browser TTS');
+            }
+        }
+
+        function quickPrompt(type) {
+            const prompts = {
+                feeding: "What should I feed my baby?",
+                sleep: "How can I improve my baby's sleep?",
+                development: "What milestones should I expect?"
+            };
+            document.getElementById('message-input').value = prompts[type];
+        }
+
+        let recognition = null;
+
+        function toggleVoice() {
+            if (!state.user.babyDOB) {
+                toggleSettings();
+                return;
+            }
+
+            const micBtn = document.getElementById('mic-btn');
+            
+            if (state.isListening) {
+                if (recognition) recognition.stop();
+                state.isListening = false;
+                micBtn.innerHTML = '<i data-lucide="mic" class="w-5 h-5 text-gray-400"></i>';
+                lucide.createIcons();
+                return;
+            }
+
+            try {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = state.user.language === 'hindi' ? 'hi-IN' : 'en-IN';
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+                recognition.onstart = () => {
+                    state.isListening = true;
+                    micBtn.innerHTML = '<i data-lucide="mic" class="w-5 h-5 text-red-500 animate-pulse"></i>';
+                    lucide.createIcons();
+                };
+
+                recognition.onresult = (e) => {
+                    const transcript = e.results[0][0].transcript;
+                    document.getElementById('message-input').value = transcript;
+                    state.isListening = false;
+                    micBtn.innerHTML = '<i data-lucide="mic" class="w-5 h-5 text-gray-400"></i>';
+                    lucide.createIcons();
+                    if (state.speakerEnabled) {
+                        speak(transcript);
+                    }
+                    setTimeout(() => sendMessage(), 500);
+                };
+
+                recognition.onerror = (e) => {
+                    console.error('Speech recognition error:', e.error);
+                    state.isListening = false;
+                    micBtn.innerHTML = '<i data-lucide="mic" class="w-5 h-5 text-gray-400"></i>';
+                    lucide.createIcons();
+                    if (e.error === 'not-allowed') {
+                        alert('Please allow microphone access to use voice input.');
+                    }
+                };
+
+                recognition.onend = () => {
+                    state.isListening = false;
+                    micBtn.innerHTML = '<i data-lucide="mic" class="w-5 h-5 text-gray-400"></i>';
+                    lucide.createIcons();
+                };
+
+                recognition.start();
+            } catch (error) {
+                console.error('Speech recognition not supported:', error);
+                alert('Voice input is not supported in your browser. Please use Chrome or Edge.');
+            }
+        }
+
+        function newChat() {
+            document.getElementById('chat-container').innerHTML = `
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="text-center py-12">
+                        <div class="w-16 h-16 bg-teal-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="message-circle" class="w-8 h-8 text-teal-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">New Conversation</h3>
+                        <p class="text-gray-400 text-sm">How can I help you today?</p>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
